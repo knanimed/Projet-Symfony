@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %} Forgot passeword | {{ parent() }}{% endblock %}
+{% block body %}
+<div class="mx-auto col-sm-4 form-control py-3 w-50 mx-auto mt-5"> 
+<div class="block-small">
+<h1 class="h3 mb-3 font-weight-normal">Reset your password</h1>
+{% for message in app.flashes('notice') %} 
+<div class="alert alert-info">
+{{message}}
+</div>
+{% endfor %}
+{{form(form)}}
+</div>
+</div>
+{% endblock %}

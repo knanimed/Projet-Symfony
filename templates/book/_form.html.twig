@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <label for="authorSelect" class="mt-2">Author</label>
+    <select name="author" id="authorSelect" class='form-select w-25'>
+        {% for author in authors %}
+            <option {%if  autor_c==author.id  %}selected{%endif%}  value="{{ author.id }}"> {{author}} </option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-outline-primary mt-3 mb-4">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

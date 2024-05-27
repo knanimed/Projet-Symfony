@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %}Borrowing index{% endblock %}
+{% block body %}
+<h1>Borrowing index</h1>
+<div class="w-100 d-flex justify-content-between align-items-end">
+<form class="d-flex gap-1 mt-5 w-25" method="get" name="book">
+    <select required name="search" class="form-select">
+        <option value="null">Choix book</option>
+        {% for book in books %}
+            <option {%if book.title==search %} selected {%endif%} value="{{book}}" >{{book}}</option>
+        {%endfor%}
+    </select>
+    <input type="submit" value="Search" class="btn btn-outline-success fw-bold" >
+</form>
+</div>
+<table class="table">
+<thead>
+<tr>
+<th>DateBorrowed</th>
+<th>Title</th>
+<th>Student</th>
+<th>BookReturned</th>
+<th>actions</th>
+</tr>
+</thead>
+<tbody>
+{% for borrowing in borrowings %}
+<tr>
+<td>{{ borrowing.dateBorrowed ? borrowing.dateBorrowed|date('Y-m-d') : '' }}</td>
+<td>{{ borrowing.book.title }}</td>
+<td>{{ borrowing.student.name ~ ' ' ~ borrowing.student.surname 
+}}</td>
+<td>{{ borrowing.bookReturned ? 'Yes' : 'No' }}</td>
+<td>
+<a class="btn btn-info me-2" href="{{ path('app_borrowing_show', {'id': borrowing.id}) 
+}}">show</a>
+<a class="btn btn-warning" href="{{ path('app_borrowing_edit', {'id': borrowing.id}) 
+}}">edit</a>
+</td>
+</tr>
+{% else %}
+<tr>
+<td colspan="4">no records found</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<a class="btn btn-outline-primary" href="{{ path('app_borrowing_new') }}">Create new</a>
+{% endblock %}
